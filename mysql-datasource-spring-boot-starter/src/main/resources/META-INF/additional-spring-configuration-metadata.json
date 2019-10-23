@@ -1,0 +1,7 @@
+{"properties": [
+    {
+      "name": "config.mysql.name",
+      "type": "java.lang.String",
+      "description": "数据源模板库名参数 spring.datasource.url 库名替换"
+    }
+]}
