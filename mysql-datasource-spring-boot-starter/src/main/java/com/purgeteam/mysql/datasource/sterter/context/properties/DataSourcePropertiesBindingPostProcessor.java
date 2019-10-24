@@ -35,6 +35,11 @@ public class DataSourcePropertiesBindingPostProcessor implements BeanPostProcess
 
     private static Logger log = LoggerFactory.getLogger(DataSourcePropertiesBindingPostProcessor.class);
 
+    private static final String URL_KEY = "url";
+    private static final String JDBC_URL_KEY = "jdbc-url";
+    private static final String USERNAME_KEY = "username";
+    private static final String PASSWORD_KEY = "password";
+
     private ApplicationContext applicationContext;
 
     private ConfigurationBeanFactoryMetadata beanFactoryMetadata;
@@ -82,10 +87,10 @@ public class DataSourcePropertiesBindingPostProcessor implements BeanPostProcess
             hostUrl = source.get("hostUrl");
         }
         String url = dataSourceFactory.urlMaking(hostUrl.toString(), source.get("name").toString());
-        dataSourceProperties.put("jdbc-url", url);
-        dataSourceProperties.put("url", url);
-        dataSourceProperties.put("username", source.get("username"));
-        dataSourceProperties.put("password", source.get("password"));
+        dataSourceProperties.put(JDBC_URL_KEY, url);
+        dataSourceProperties.put(URL_KEY, url);
+        dataSourceProperties.put(USERNAME_KEY, source.get(USERNAME_KEY));
+        dataSourceProperties.put(PASSWORD_KEY, source.get(PASSWORD_KEY));
         bind(bean, dataSourceProperties);
     }
 
