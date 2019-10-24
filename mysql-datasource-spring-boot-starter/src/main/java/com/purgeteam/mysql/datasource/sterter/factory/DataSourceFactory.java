@@ -2,8 +2,6 @@ package com.purgeteam.mysql.datasource.sterter.factory;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.purgeteam.mysql.datasource.sterter.DataSourceConfigProperties;
-import com.purgeteam.mysql.datasource.sterter.MoreDataSourceProperties;
-import com.purgeteam.mysql.datasource.sterter.annotation.DataSourceSelector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.bind.Bindable;
@@ -127,8 +125,6 @@ public class DataSourceFactory implements EnvironmentAware {
      * @return url
      */
     private String urlProcessor(String dataSourceName) {
-
-        // jdbc:mysql://10.1.1.97:5511/one_mysql?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&autoReconnect=true
 
         String url = evn.getProperty(DEFAULT_DATASOURCE_URL);
         if (StringUtils.isEmpty(url)) {

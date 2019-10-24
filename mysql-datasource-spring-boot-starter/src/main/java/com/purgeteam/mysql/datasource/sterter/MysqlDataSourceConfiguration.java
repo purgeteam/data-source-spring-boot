@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 1.0
  */
 @Configuration
-@EnableConfigurationProperties({MoreDataSourceProperties.class, DataSourceConfigProperties.class})
+@EnableConfigurationProperties(DataSourceConfigProperties.class)
 public class MysqlDataSourceConfiguration {
 
     @Bean
