@@ -17,9 +17,6 @@ import javax.sql.DataSource;
 @Configuration
 public class TowDataSourceConfiguration {
 
-    @Resource
-    private DataSourceConfigProperties properties;
-
     /**
      * DataSourceFactory#createDataSource 方式加载 tow_mysql 数据库
      *
@@ -27,7 +24,7 @@ public class TowDataSourceConfiguration {
      * @return {@link DataSource}
      */
     @Bean
-    public DataSource towDataSource(DataSourceFactory dataSourceFactory) {
+    public DataSource towDataSource(DataSourceFactory dataSourceFactory, DataSourceConfigProperties properties) {
         DataSourceConfigProperties.SourceInfo towMysql = properties.getSourceInfoMap().get("tow_mysql");
         if (towMysql == null) {
             throw new IllegalArgumentException("未获取到相应配置");

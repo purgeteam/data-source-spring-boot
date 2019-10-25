@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 /**
- *
+ * 注解方式注入 {@link DataSource}
  *
  * @author purgeyao
  * @since 1.0
@@ -30,7 +30,7 @@ public class AnnotationsDataSourceConfiguration {
     }
 
     /**
-     * todo 注解选择器
+     * {@link DataSourceSelector} 方式选择注入 {@link DataSource}
      *
      * @return {@link DataSource}
      */
