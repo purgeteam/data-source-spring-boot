@@ -81,7 +81,7 @@ spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 spring.datasource.url=jdbc:mysql://${config.mysql.hosturl}/${config.mysql.name}?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&autoReconnect=true
 spring.datasource.jdbc-url=${spring.datasource.url}
 spring.datasource.username=root
-spring.datasource.password=Rtqw123OpnmER
+spring.datasource.password=root
 spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
 spring.datasource.driverClassName=com.mysql.jdbc.Driver
 spring.datasource.filters=stat
@@ -130,11 +130,15 @@ public class OneDataSourceConfiguration {
 }
 ```
 
+这样可以把名为 `one_mysql` 数据库数据源进行加载。
+
 ### 2 数据库信息结合配置模板
 
 当然只有上面方式只适合数据库地址密码一致的情况下,库名不一致,注入多数据源。
 
 下面方式支持数据库信息不一致情况下使用模板注入多数据源。
+
+需要先配置 mysql (1 配置模板),另行加下下面配置。
 
 **配置:**
 
