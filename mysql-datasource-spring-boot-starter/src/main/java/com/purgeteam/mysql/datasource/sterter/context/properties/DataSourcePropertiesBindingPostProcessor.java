@@ -26,6 +26,7 @@ import javax.sql.DataSource;
 import java.lang.annotation.Annotation;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 /**
  * @author purgeyao
@@ -75,11 +76,19 @@ public class DataSourcePropertiesBindingPostProcessor implements BeanPostProcess
         Map dataSourceProperties = binder.bind(DataSourceFactory.DEFAULT_DATASOURCE_PREFIX, Map.class).get();
 
         String value = annotation.value();
-        Map test = binder.bind(DataSourceConfigProperties.PREFIX, Map.class).get();
-        LinkedHashMap sourceInfoMap = (LinkedHashMap) test.get("source-info-map");
+        LinkedHashMap sourceInfoMap = new LinkedHashMap(16);
+        try {
+            Map source = binder.bind(DataSourceConfigProperties.PREFIX, Map.class).get();
+            sourceInfoMap.putAll((LinkedHashMap) source.get("source-info-map"));
+        } catch (NoSuchElementException exception) {
+            throw new IllegalArgumentException(
+                    String.format("<%s> prefix not found, No value bound.", DataSourceConfigProperties.PREFIX));
+        }
+
         Object sourceInfo = sourceInfoMap.get(value);
         if (StringUtils.isEmpty(sourceInfo)) {
-            throw new IllegalArgumentException(String.format("MoreDataSourceProperties.SourceInfo %s data is null", value));
+            throw new IllegalArgumentException(
+                    String.format("MoreDataSourceProperties.SourceInfo %s data is null", value));
         }
         LinkedHashMap source = (LinkedHashMap) sourceInfo;
         Object hostUrl = source.get("host-url");
